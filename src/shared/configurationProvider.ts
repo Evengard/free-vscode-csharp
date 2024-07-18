@@ -51,18 +51,21 @@ export class BaseVsDbgConfigurationProvider implements vscode.DebugConfiguration
         // Load settings before resolving variables as there may be variables set in settings.
         this.loadSettingDebugOptions(debugConfiguration);
 
-        const cSharpDebuggerCmdLine = vscode.window.createOutputChannel('cSharpDebuggerCmdLine');
-
-        cSharpDebuggerCmdLine.appendLine('Before argv parse: ' + JSON.stringify(debugConfiguration));
-
         if ('args' in debugConfiguration) {
             if (typeof debugConfiguration['args'] === 'string') {
                 debugConfiguration['args'] = parseArgsStringToArgv(debugConfiguration['args']);
             }
         }
-        debugConfiguration['program'] = debugConfiguration['args'].shift();
 
-        cSharpDebuggerCmdLine.appendLine('After argv parse: ' + JSON.stringify(debugConfiguration));
+        if (
+            (!debugConfiguration['program'] ||
+                (typeof debugConfiguration['program'] === 'string' &&
+                    debugConfiguration['program'].endsWith('/dotnet'))) &&
+            'args' in debugConfiguration &&
+            debugConfiguration['args'].length > 0
+        ) {
+            debugConfiguration['program'] = debugConfiguration['args'].shift();
+        }
 
         return debugConfiguration;
     }
