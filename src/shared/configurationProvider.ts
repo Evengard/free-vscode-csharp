@@ -18,6 +18,7 @@ import {
 import { PlatformInformation } from './platform';
 import { getCSharpDevKit } from '../utils/getCSharpDevKit';
 import { commonOptions } from './options';
+import { parseArgsStringToArgv } from 'string-argv';
 
 /**
  * Class used for debug configurations that will be sent to the debugger registered by {@link DebugAdapterExecutableFactory}
@@ -49,6 +50,13 @@ export class BaseVsDbgConfigurationProvider implements vscode.DebugConfiguration
 
         // Load settings before resolving variables as there may be variables set in settings.
         this.loadSettingDebugOptions(debugConfiguration);
+
+        if ('args' in debugConfiguration) {
+            if (typeof debugConfiguration['args'] === 'string') {
+                debugConfiguration['args'] = parseArgsStringToArgv(debugConfiguration['args']);
+            }
+        }
+        debugConfiguration['program'] = debugConfiguration['args'].shift();
 
         return debugConfiguration;
     }
