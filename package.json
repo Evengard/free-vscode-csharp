@@ -453,7 +453,7 @@
     {
       "id": "Debugger",
       "description": ".NET Core Debugger (macOS / arm64)",
-      "url": "https://github.com/Evengard/netcoredbg/releases/download/macos-arm64/macos-darwin.tar.gz",
+      "url": "https://github.com/Evengard/netcoredbg/releases/download/macos-arm64/darwin-arm64.tar.gz",
       "installPath": ".debugger",
       "platforms": [
         "darwin"
