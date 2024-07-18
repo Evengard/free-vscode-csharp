@@ -443,7 +443,22 @@
         "darwin"
       ],
       "architectures": [
-        "x86_64",
+        "x86_64"
+      ],
+      "binaries": [
+        "./netcoredbg"
+      ],
+      "installTestPath": ".debugger/netcoredbg/netcoredbg"
+    },
+    {
+      "id": "Debugger",
+      "description": ".NET Core Debugger (macOS / arm64)",
+      "url": "https://github.com/Evengard/netcoredbg/releases/download/macos-arm64/macos-darwin.tar.gz",
+      "installPath": ".debugger",
+      "platforms": [
+        "darwin"
+      ],
+      "architectures": [
         "arm64"
       ],
       "binaries": [
